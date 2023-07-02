@@ -21,8 +21,6 @@ param location string
 param resourceGroupName string = ''
 param formRecognizerServiceName string = ''
 param formRecognizerSkuName string = 'S0'
-param formRecognizerResourceGroupName string = ''
-
 
 var abbrs = loadJsonContent('./abbreviations.json')
 
@@ -56,10 +54,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 // A full example that leverages azd bicep modules can be seen in the todo-python-mongo template:
 // https://github.com/Azure-Samples/todo-python-mongo/tree/main/infra
 
-
-
-
-
 module formRecognizer 'core/ai/cognitiveservices.bicep' = {
   name: 'formrecognizer'
   scope: rg
@@ -84,6 +78,5 @@ module formRecognizer 'core/ai/cognitiveservices.bicep' = {
 // To see these outputs, run `azd env get-values`,  or `azd env get-values --output json` for json output.
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
-
-
-
+output AZURE_FORMRECOGNIZER_SERVICE string = formRecognizer.outputs.name
+output AZURE_FORMRECOGNIZER_ENDPOINT string = formRecognizer.outputs.endpoint
