@@ -1,1 +1,3 @@
 .azure
+/data/*
+!/data/layout.sample.pdf
