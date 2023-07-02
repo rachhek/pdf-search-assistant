@@ -1,3 +1,17 @@
+# About
+The aim of this project is to build a tool that can:
+1. Search for answers from an uploaded PDF(s)
+2. Filter the search on specific page components (e.g. headers, sub header, tables, paragraphs, etc.)
+3. Filter the search on specific pages
+4. Show the search results as PDF annotations
+5. Summarize the answers for the questions in a concise manner
+
+# How?
+The project will use Microsoft form recognizer to extract the text from the PDFs and then use a search engine to search for the answers. The search engine will be built using Azure Cognitive Search.The summarization will done using a Large Language Model from Azure OpenAI service.
+
+# Project Setup
+The project is built using Azure Developer CLI (azd). The following is the README from the azd starter project.
+
 # Azure Developer CLI (azd) Bicep Starter
 
 A starter blueprint for getting your application up on Azure using [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview) (azd). Add your application code, write Infrastructure as Code assets in [Bicep](https://aka.ms/bicep) to get your application up and running quickly.
