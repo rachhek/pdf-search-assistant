@@ -22,6 +22,9 @@ param resourceGroupName string = ''
 param formRecognizerServiceName string = ''
 param formRecognizerSkuName string = 'S0'
 
+@description('Id of the user or app to assign application roles')
+param principalId string = ''
+
 var abbrs = loadJsonContent('./abbreviations.json')
 
 // tags that should be applied to all resources.
@@ -65,6 +68,16 @@ module formRecognizer 'core/ai/cognitiveservices.bicep' = {
     sku: {
       name: formRecognizerSkuName
     }
+  }
+}
+
+module formRecognizerRoleUser 'core/security/role.bicep' = {
+  scope: rg
+  name: 'formrecognizer-role-user'
+  params: {
+    principalId: principalId
+    roleDefinitionId: 'a97b65f3-24c7-4388-baec-2e87135dc908'
+    principalType: 'User'
   }
 }
 
