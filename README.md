@@ -87,3 +87,26 @@ For `appservice`, the following host configuration options are often modified:
 - Exposed port from the running container (if running a web service)
 - Allowed origins for CORS (Cross-Origin Resource Sharing) protection (if running a web service backend with a frontend)
 - The run command that starts up your service
+
+### Prerequisites
+
+#### To Run Locally
+- [Azure Developer CLI](https://aka.ms/azure-dev/install)
+- [Python 3+](https://www.python.org/downloads/)
+    - **Important**: Python and the pip package manager must be in the path in Windows for the setup scripts to work.
+    - **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.    
+- [Node.js](https://nodejs.org/en/download/)
+- [Git](https://git-scm.com/downloads)
+- [Powershell 7+ (pwsh)](https://github.com/powershell/powershell) - For Windows users only.
+   - **Important**: Ensure you can run `pwsh.exe` from a PowerShell command. If this fails, you likely need to upgrade PowerShell.
+- [Powershell for Mac/Linux (pwsh)](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.3)
+
+
+1. Install the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
+1. Run `azd init -t azure-search-openai-demo`
+1. Run `azd env refresh -e {environment name}` - Note that they will need the azd environment name, subscription Id, and location to run this command - you can find those values in your `./azure/{env name}/.env` file.  This will populate their azd environment's .env file with all the settings needed to run the app locally.
+1. Run `pwsh ./scripts/roles.ps1` - This will assign all of the necessary roles to the user so they can run the app locally.  If they do not have the necessary permission to create roles in the subscription, then you may need to run this script for them. Just be sure to set the `AZURE_PRINCIPAL_ID` environment variable in the azd .env file or in the active shell to their Azure Id, which they can get with `az account show`.
+2. az ad signed-in user show
+
+
+>NOTE: Your Azure Account must have `Microsoft.Authorization/roleAssignments/write` permissions, such as [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner).  

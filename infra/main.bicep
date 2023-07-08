@@ -21,8 +21,9 @@ param location string
 param resourceGroupName string = ''
 param formRecognizerServiceName string = ''
 param formRecognizerSkuName string = 'S0'
-param formRecognizerResourceGroupName string = ''
 
+@description('Id of the user or app to assign application roles')
+param principalId string = ''
 
 var abbrs = loadJsonContent('./abbreviations.json')
 
@@ -56,10 +57,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 // A full example that leverages azd bicep modules can be seen in the todo-python-mongo template:
 // https://github.com/Azure-Samples/todo-python-mongo/tree/main/infra
 
-
-
-
-
 module formRecognizer 'core/ai/cognitiveservices.bicep' = {
   name: 'formrecognizer'
   scope: rg
@@ -74,6 +71,16 @@ module formRecognizer 'core/ai/cognitiveservices.bicep' = {
   }
 }
 
+module formRecognizerRoleUser 'core/security/role.bicep' = {
+  scope: rg
+  name: 'formrecognizer-role-user'
+  params: {
+    principalId: principalId
+    roleDefinitionId: 'a97b65f3-24c7-4388-baec-2e87135dc908'
+    principalType: 'User'
+  }
+}
+
 // Add outputs from the deployment here, if needed.
 //
 // This allows the outputs to be referenced by other bicep deployments in the deployment pipeline,
@@ -84,6 +91,5 @@ module formRecognizer 'core/ai/cognitiveservices.bicep' = {
 // To see these outputs, run `azd env get-values`,  or `azd env get-values --output json` for json output.
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
-
-
-
+output AZURE_FORMRECOGNIZER_SERVICE string = formRecognizer.outputs.name
+output AZURE_FORMRECOGNIZER_ENDPOINT string = formRecognizer.outputs.endpoint

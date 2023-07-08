@@ -1,1 +1,7 @@
 .azure
+/data/*
+!/data/layout.sample.pdf
+#git ignore for python project
+*.pyc
+*.pyo
+*.pyd
