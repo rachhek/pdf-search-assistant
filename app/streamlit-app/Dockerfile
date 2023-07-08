@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app.py /code/app.py
 
-CMD ["streamlit", "run", "todo/app.py", "--server.port", "80"]
+CMD ["streamlit", "run", "/code/app.py", "--server.port", "80"]
