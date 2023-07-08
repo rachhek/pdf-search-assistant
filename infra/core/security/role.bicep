@@ -7,7 +7,7 @@ param principalId string
   'ServicePrincipal'
   'User'
 ])
-param principalType string = 'User'
+param principalType string = 'ServicePrincipal'
 param roleDefinitionId string
 
 resource role 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
