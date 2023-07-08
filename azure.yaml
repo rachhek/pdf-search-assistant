@@ -14,20 +14,8 @@ services:
   ## The service will be hosted on Azure App Service.
   streamlit-app:
     language: python
-    project: ./app
-    host: appservice
-    hooks:
-      prepackage:
-        windows:
-          shell: pwsh
-          run:  cd streamlit-app;sudo apt install python3-pip;python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
-          interactive: true
-          continueOnError: false
-        posix:
-          shell: sh
-          run:  cd streamlit-app;sudo apt install python3-pip;python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
-          interactive: true
-          continueOnError: false
+    project: ./app/streamlit-app
+    host: containerapp
 
 #   python-api:
 #     language: python
