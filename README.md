@@ -1,3 +1,5 @@
+[![.github/workflows/azure-dev.yml](https://github.com/rachhek/pdf-search-assistant/actions/workflows/azure-dev.yml/badge.svg)](https://github.com/rachhek/pdf-search-assistant/actions/workflows/azure-dev.yml)
+
 # About
 The aim of this project is to build a tool that can:
 1. Search for answers from an uploaded PDF(s)
