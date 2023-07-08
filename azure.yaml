@@ -14,18 +14,18 @@ services:
   ## The service will be hosted on Azure App Service.
   streamlit-app:
     language: python
-    project: ./app/strealit-app
+    project: ./app
     host: appservice
     hooks:
       prepackage:
         windows:
           shell: pwsh
-          run:  python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
+          run:  cd streamlit-app;python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
           interactive: true
           continueOnError: false
         posix:
           shell: sh
-          run:  python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
+          run:  cd streamlit-app;python -m pip install -r requirements.txt; streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py --server.port 80
           interactive: true
           continueOnError: false
 
