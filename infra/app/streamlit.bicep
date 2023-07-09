@@ -7,7 +7,7 @@ param applicationInsightsName string
 param containerAppsEnvironmentName string
 param containerRegistryName string
 param keyVaultName string
-param serviceName string = 'api'
+param serviceName string = 'streamlit'
 param exists bool
 
 resource apiIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
