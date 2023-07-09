@@ -52,7 +52,7 @@ module app '../core/host/container-app-upsert.bicep' = {
         value: applicationInsights.properties.ConnectionString
       }
     ]
-    targetPort: 3100
+    targetPort: 80
   }
 }
 
