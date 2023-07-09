@@ -12,9 +12,9 @@ services:
   ## The language is 'python'.
   ## The source code is located in the project (azure.yaml) directory.
   ## The service will be hosted on Azure App Service.
-  streamlit-app:
+  streamlit:
     language: python
-    project: ./app/streamlit-app
+    project: ./app/streamlit
     host: containerapp
 
 #   python-api:
