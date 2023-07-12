@@ -5,3 +5,5 @@
 *.pyc
 *.pyo
 *.pyd
+/data_output
+test.ipynb
