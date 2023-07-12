@@ -12,8 +12,6 @@ from azure.identity import AzureDeveloperCliCredential
 from azure.core.credentials import AzureKeyCredential
 
 from utils import get_azure_env_var
-import html
-
 import json
 
 cognitive_service = get_azure_env_var()["AZURE_FORMRECOGNIZER_SERVICE"].replace('"', "")
@@ -21,18 +19,6 @@ cognitive_service = get_azure_env_var()["AZURE_FORMRECOGNIZER_SERVICE"].replace(
 endpoint = f"https://{cognitive_service}.cognitiveservices.azure.com/"
 default_creds = AzureDeveloperCliCredential()
 formUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/contoso-allinone.jpg"
-
-
-def get_pdf_parts(file, output):
-    document_analysis_client = DocumentAnalysisClient(
-        endpoint=endpoint, credential=default_creds
-    )
-    with open(file, "rb") as f:
-        poller = document_analysis_client.begin_analyze_document("prebuilt-layout", f)
-    result = poller.result()
-    with open(output, "w") as f:
-        f.write(str(result))
-    return result
 
 
 def object_to_dict(obj):
@@ -47,7 +33,6 @@ def object_to_dict(obj):
 
 
 def get_document_text(filename, output):
-    offset = 0
     page_map = []
 
     print(f"Extracting text from '{filename}' using Azure Form Recognizer")
@@ -87,17 +72,3 @@ res = get_document_text(
     "data/tender_request_01.pdf", output="data_output/tender_request_01.json"
 )
 print(res)
-
-
-# def format_pages(pages):
-#     return pages
-
-
-# def format_tables(tables):
-#     return [
-#         {"table_number": idx + 1, "content": table} for idx, table in enumerate(tables)
-#     ]
-
-
-# def format_paragraphs(paragraphs):
-#     return paragraphs
