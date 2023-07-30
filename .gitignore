@@ -5,3 +5,7 @@
 *.pyc
 *.pyo
 *.pyd
+/data_output
+test.ipynb
+frontend/public
+frontend/node_modules
