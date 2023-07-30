@@ -24,6 +24,12 @@ The following assets have been provided:
 - A [dev container](https://containers.dev) configuration file under the `.devcontainer` directory that installs infrastructure tooling by default. This can be readily used to create cloud-hosted developer environments such as [GitHub Codespaces](https://aka.ms/codespaces).
 - Continuous deployment workflows for CI providers such as GitHub Actions under the `.github` directory, and Azure Pipelines under the `.azdo` directory that work for most use-cases.
 
+# Project Directory
+1. app : Streamlit application host.
+2. infra : Bicep files for provisioning Azure resources.
+3. scripts : Powershell and shell scripts storage.
+4. data: Store files for the application
+
 ## Next Steps
 
 ### Step 1: Add application code
