@@ -30,6 +30,41 @@ The following assets have been provided:
 3. scripts : Powershell and shell scripts storage.
 4. data: Store files for the application
 
+# Application data flow and architecture
+1. User opens the Streamlit application.
+   1. User sees Streamlit application UI.
+   2. User uploads PDF file(s) to the application.
+2. File processing is triggered.
+   1. A directory with the same name as the file is created in Azure Blob Storage to store the files.
+   2. The original PDF file is saved to Azure Blob Storage under FileName/original
+   3. The PDF file is divided into pages (JPGs) and saved to Azure Blob Storage under FileName/pages
+3. Text extraction is triggered.
+   1. Text extraction is done using Azure Form Recognizer using Layout API.
+   2. The original PDF file is sent to Azure Form Recognizer to extract the text.
+   3. Form recognizer returns 4 types of data
+      1. Page per text
+      2. Paragraphs in the document along with x,y coordinates bounding box
+      3. Tables in the document along with x,y coordinates bounding box
+   4. Each of the above data is saved to Azure Blob Storage under FileName/extraction.
+4. Azure Cognitive Search is triggered.
+   1. 3 indexes are created per document uploaded in the Azure cognitive search.
+      1. Page per text
+      2. Paragraphs in the document along with x,y coordinates bounding box
+      3. Tables in the document along with x,y coordinates bounding box
+   2. The data is indexed in the above indexes.
+   3. The schema is created for the above indexes.
+5. After step 2,3, and 4 are done User is shown the search UI.
+   1. User can search for a keyword in the search bar.
+   2. User can filter the search on the following:
+      1. Page
+      2. Page component (e.g. header, sub header, paragraph, table, etc.)
+      3. Tables
+6. Search and OpenAI summarization is triggered.
+   1. The search is done on the Azure Cognitive Search indexes.
+   2. The search results are shown to the user as PDF annotations.
+   3. The search results are summarized using Azure OpenAI service.
+7. Search results are shown to the user.
+
 ## Next Steps
 
 ### Step 1: Add application code
